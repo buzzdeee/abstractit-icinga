@@ -5,6 +5,7 @@
 class icinga::install {
 
   $ido_db_server = $::icinga::ido_db_server,
+  $web_db_server = $::icinga::web_db_server,
   $manage_repo   = $::icinga::manage_repo,
   $gui_type      = $::icinga::gui_type
 
@@ -62,7 +63,7 @@ class icinga::install {
       $packages = ['icinga2', "icinga-ido-${ido_db_server}" ]
       $package_require = undef
       if $gui_type =~ /^(web|both)$/ {
-        $web_packages = 'icinga-web2'
+        $web_packages = [ 'icinga-web2', "php-pdo_${web_db_server}" ]
         $web_packages_require = undef
       } else {
         $web_packages         = undef
