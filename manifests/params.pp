@@ -115,11 +115,11 @@ class icinga::params {
       $manage_repo          = false
       $configure_firewall   = false
       $nagios_plugins       = '/usr/local/libexec/nagios'
-      $cgi_path             = undef
-      $html_path            = undef
-      $css_path             = undef
+      $cgi_path             = '/var/www/cgi-bin/icinga'
+      $html_path            = '/var/www/icinga-web2'
+      $css_path             = '/var/www/icinga-web2/public/css'
       $pnp4nagios_html_path = undef
-      $cgi_url              = undef
+      $cgi_url              = '/cgi-bin/icinga'
       $web_auth_user_file   = '/etc/apache2/htpasswd.users'
       $web_auth_group_file  = '/etc/apache2/htpasswd.groups'
       $icinga_user          = '_icinga'
