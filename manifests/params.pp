@@ -120,8 +120,8 @@ class icinga::params {
       $css_path             = undef
       $pnp4nagios_html_path = undef
       $cgi_url              = undef
-      $web_auth_user_file   = undef
-      $web_auth_group_file  = undef
+      $web_auth_user_file   = '/etc/apache2/htpasswd.users'
+      $web_auth_group_file  = '/etc/apache2/htpasswd.groups'
       $icinga_user          = '_icinga'
       $icinga_group         = '_icinga'
     }
