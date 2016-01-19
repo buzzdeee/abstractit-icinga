@@ -58,8 +58,19 @@ class icinga::install {
           $web_packages_require = undef
       }
     }
+    'OpenBSD' : {
+      $packages = ['icinga2', "icinga-ido-${ido_db_server}" ]
+      $package_require = undef
+      if $gui_type =~ /^(web|both)$/ {
+        $web_packages = 'icinga-web2'
+        $web_packages_require = undef
+      } else {
+        $web_packages         = undef
+        $web_packages_require = undef
+      }
+    }
     default  : {
-      fail("Only support Red Hat and Debian type systems, not ${::osfamily}")
+      fail("${::module_name}: Only support osfamilies Red Hat, Debian and OpenBSD, not ${::osfamily}")
     }
   }
   package { $packages:

@@ -9,10 +9,8 @@ class icinga::params {
   $ssl_cacrt            = undef
   $ssl_cypher_list      = 'ALL:!ADH:RC4+RSA:+HIGH:!MEDIUM:!LOW:!SSLv2:+SSLv3:+TLSv1:!EXP:!eNULL'
   $manage_users         = true
-  $manage_repo          = true
   $manage_ssl           = false
   $webhostname          = $::fqdn
-  $configure_firewall   = true
   $gui_type             = 'classic'
   $notifications        = 1
   $embedded_perl        = 0
@@ -80,6 +78,8 @@ class icinga::params {
           $cgi_path        = '/usr/lib/icinga/cgi'
         }
       }
+      $manage_repo          = true
+      $configure_firewall   = true
       $html_path            = '/usr/share/icinga'
       $css_path             = undef
       $pnp4nagios_html_path = '/usr/share/nagios/html/pnp4nagios'
@@ -90,6 +90,8 @@ class icinga::params {
       $web_auth_group_file  = '/etc/httpd/htpasswd.groups'
     }
     'Debian': {
+      $manage_repo          = true
+      $configure_firewall   = true
       $nagios_plugins       = '/usr/lib/nagios/plugins'
       $cgi_path             = '/usr/lib/cgi-bin/icinga'
       $html_path            = '/usr/share/icinga/htdocs'
@@ -108,6 +110,20 @@ class icinga::params {
           $icinga_group         = 'icinga'
         }
       }
+    }
+    'OpenBSD': {
+      $manage_repo          = false
+      $configure_firewall   = false
+      $nagios_plugins       = '/usr/local/libexec/nagios'
+      $cgi_path             = undef
+      $html_path            = undef
+      $css_path             = undef
+      $pnp4nagios_html_path = undef
+      $cgi_url              = undef
+      $web_auth_user_file   = undef
+      $web_auth_group_file  = undef
+      $icinga_user          = '_icinga'
+      $icinga_group         = '_icinga'
     }
     default: {
       fail("Only Debian/Red Hat based systems supported, not ${::osfamily}")
