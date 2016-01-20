@@ -88,6 +88,7 @@ class icinga::params {
       $icinga_group         = 'icinga'
       $web_auth_user_file   = '/etc/httpd/htpasswd.users'
       $web_auth_group_file  = '/etc/httpd/htpasswd.groups'
+      $spool_path           = '/var/spool/icinga'
     }
     'Debian': {
       $manage_repo          = true
@@ -100,6 +101,7 @@ class icinga::params {
       $cgi_url              = '/cgi-bin/icinga'
       $web_auth_user_file   = '/etc/apache2/htpasswd.users'
       $web_auth_group_file  = '/etc/apache2/htpasswd.groups'
+      $spool_path           = '/var/spool/icinga'
       case $::lsbdistcodename {
         'trusty': {
           $icinga_user          = 'nagios'
@@ -122,6 +124,7 @@ class icinga::params {
       $cgi_url              = '/cgi-bin/icinga'
       $web_auth_user_file   = '/etc/apache2/htpasswd.users'
       $web_auth_group_file  = '/etc/apache2/htpasswd.groups'
+      $spool_path           = '/var/spool/icinga2'
       $icinga_user          = '_icinga'
       $icinga_group         = '_icinga'
     }

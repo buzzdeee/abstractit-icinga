@@ -7,6 +7,7 @@ class icinga::users {
   $icinga_user    = $icinga::icinga_user
   $icinga_group   = $icinga::icinga_group
   $icinga_cmd_grp = $icinga::icinga_cmd_grp
+  $spool_path     = $icinga::spool_path
 
   group { $icinga_cmd_grp:
     ensure => present,
@@ -20,7 +21,7 @@ class icinga::users {
     ensure     => present,
     groups     => [$icinga_group,$icinga_cmd_grp],
     system     => true,
-    home       => '/var/spool/icinga',
+    home       => $spool_path,
     managehome => false,
   }
 }

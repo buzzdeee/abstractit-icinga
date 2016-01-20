@@ -27,6 +27,7 @@ class icinga::config {
   $admin_pager          = $::icinga::admin_pager
   $stalking             = $::icinga::stalking
   $flap_detection       = $::icinga::flap_detection
+  $spool_path           = $::icinga::spool_path
 
   $ensure_idoutils = $enable_ido? {
     default => 'file',
@@ -116,27 +117,27 @@ class icinga::config {
     require => File['/var/log/icinga']
   }
 
-  file { '/var/spool/icinga':
+  file { $spool_path:
     ensure => directory,
     owner  => $icinga_user,
     group  => $icinga_group,
     mode   => '0755',
   }
 
-  file { '/var/spool/icinga/checkresults':
+  file { "${spool_path}/checkresults":
     ensure  => directory,
     owner   => $icinga_user,
     group   => $icinga_group,
     mode    => '0775',
-    require => File['/var/spool/icinga']
+    require => File[$spool_path]
   }
 
-  file { '/var/spool/icinga/cmd':
+  file { "${spool_path}/cmd":
     ensure  => directory,
     owner   => $icinga_user,
     group   => $icinga_cmd_grp,
     mode    => '2755',
-    require => File['/var/spool/icinga']
+    require => File[$spool_path]
   }
 
   file { '/var/run/icinga':
