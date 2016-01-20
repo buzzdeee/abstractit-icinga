@@ -60,10 +60,14 @@ class icinga::install {
       }
     }
     'OpenBSD' : {
-      $packages = [ 'icinga2', "icinga-ido-${ido_db_server}" ]
+      $packages = [ 'icinga2', "php-pdo_${ido_db_server}" ]
       $package_require = undef
       if $gui_type =~ /^(web|both)$/ {
-        $web_packages = [ 'icinga-web2', "php-pdo_${web_db_server}" ]
+        if $ido_db_server != $web_db_server {
+          $web_packages = [ 'icinga-web2', "php-pdo_${web_db_server}" ]
+        } else {
+          $web_packages = [ 'icinga-web2' ]
+        }
         $web_packages_require = undef
       } else {
         $web_packages         = undef
